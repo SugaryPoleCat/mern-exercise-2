@@ -17,6 +17,8 @@ try {
 			useNewUrlParser: true
 		},
 	).then(async client => {
+		// get inital reference to restaurants collection in database. AKA THE RESTAURATS TABLE.
+		await RestaurantsDAO.injectDB(client);
 		app.listen(PORT, ()=>{
 			console.log(`server started on: ${PORT}`);
 		})

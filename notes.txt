@@ -1,1 +1,2 @@
 doing "modules": "true" in package.json, makes it possible for JS to use import like Typescript. 
+npx is basically a script from the npm that install all the dependencies and such.

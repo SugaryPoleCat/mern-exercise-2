@@ -60,18 +60,18 @@ export default class RestaurantsDAO {
 		// limit the results shown 
 		// skip shows the actual page number
 		const displayCursor = cursor.limit(restaurantsPerPage).skip(restaurantsPerPage * page);
-		console.log('display cursor: ', displayCursor);
+		// console.log('display cursor: ', displayCursor);
 
 		try {
 			// give the result to an array.
 			const restaurantList = await displayCursor.toArray();
-			console.log('display cursos to array: ', await displayCursor.toArray());
+			// console.log('display cursos to array: ', await displayCursor.toArray());
 			// count the documents in the query.
 			// documetns is the way in MongoDB of saying "items"... mongodb trying to be fancy and shit.
 			const totalNumberRestaurants = await restaurants.countDocuments(query);
 
 			console.log('we got the list and the number of restaurants!');
-			console.log('LIST: ', restaurantList);
+			// console.log('LIST: ', restaurantList);
 			return { restaurantList, totalNumberRestaurants };
 		} catch (err) {
 			console.error('Unable to convert cursor to array or problem counting documents: ', err);

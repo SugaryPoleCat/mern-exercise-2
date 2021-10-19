@@ -7,8 +7,9 @@ export default class RestaurantsController {
 	static async apiGetRestaurants(req, res) {
 		// set restaurants per page based on query parsed in the URL.
 		// The thing before the ? checks if it Exists or is true, then we do the thing. : means that if it does NOT, ten do this. 
-		const restaurantsPerPage = req.query.restaurantsPerPage ? parseInt(req.query.restaurantsPerPage, 10) : parseInt(process.env.RESTAURANTS_PP);
-		const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+		// i only wonder why he did ,10 i dont get it, he dont explain it
+		const restaurantsPerPage = req.query.restaurantsPerPage ? parseInt(req.query.restaurantsPerPage) : parseInt(process.env.RESTAURANTS_PP);
+		const page = req.query.page ? parseInt(req.query.page) : 0;
 
 		// idk why he makes --- kind of 2 same files?
 		// RestaurantsDAO and this one have almost the same things.
@@ -26,17 +27,19 @@ export default class RestaurantsController {
 		// finally pass it all to the DAO.
 		// it all could have been done in 1 file, and idk why he spread it out like that, but i can fix it in later commits.
 		try {
-			const { restaurantsList, totalNumRestaurants } = await RestaurantsDAO.getRestaurants({ filters, page, restaurantsPerPage });
+			// restaurantList is what its called in RestaruantsDAO.getRestaurants.
+			// AND thats what fixes the response too. OMG
+			const { restaurantList, totalNumRestaurants } = await RestaurantsDAO.getRestaurants({ filters, page, restaurantsPerPage });
 
 			// he put in let in his tutorial, but im gonna go with const, because we dont change this.
 			const response = {
-				restaurants: restaurantsList,
+				restaurants: restaurantList,
 				page: page,
 				filters: filters,
 				entries_per_page: restaurantsPerPage,
 				total_results: totalNumRestaurants,
 			};
-			console.log('response: ', response);
+			// console.log('response: ', response);
 			// and then RESPOND with a JOSN call.
 			res.json(response);
 		}

@@ -26,7 +26,7 @@ export default class RestaurantsDAO {
 		// options. these are defaults;
 		filters = null,
 		page = 0,
-		restaurantsPerPage = 20,
+		restaurantsPerPage = parseInt(process.env.RESTAURANTS_PP),
 	} = {}) {
 		let query;
 		// if the filters are empty, just go by defualt.

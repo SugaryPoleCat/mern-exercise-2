@@ -1,0 +1,1 @@
+the whole thing about frontend we have to rewatch becasue i was too tired when following to understand anything

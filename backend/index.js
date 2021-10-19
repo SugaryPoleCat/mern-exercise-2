@@ -2,6 +2,7 @@ import app from './server.js';
 import mongodb from 'mongodb';
 import dotenv from 'dotenv';
 import RestaurantsDAO from './dao/restaurantsDAO.js';
+import ReviewsDAO from './dao/reviewsDAO.js';
 dotenv.config();
 
 const MongoClient = mongodb.MongoClient;
@@ -24,6 +25,7 @@ try {
 	).then(async client => {
 		// get inital reference to restaurants collection in database. AKA THE RESTAURATS TABLE.
 		await RestaurantsDAO.injectDB(client);
+		await ReviewsDAO.injectDB(client);
 		app.listen(PORT, () => {
 			console.log(`server started on: ${PORT}`);
 		})

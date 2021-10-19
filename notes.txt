@@ -1,0 +1,1 @@
+doing "modules": "true" in package.json, makes it possible for JS to use import like Typescript. 

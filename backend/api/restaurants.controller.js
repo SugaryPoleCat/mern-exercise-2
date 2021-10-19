@@ -46,5 +46,30 @@ export default class RestaurantsController {
 		catch (err) {
 			console.error('Unable to convert cursor to array or problem counting documents: ', err);
 		}
-	}
-}
+	};
+
+	static async apiGetRestaurantByID(req, res) {
+		try {
+			let id = req.params.id || {};
+			let restaurant = await RestaurantsDAO.apiGetRestaurantByID(id);
+			if (!restaurant) {
+				res.status(404).json({ error: 'Not found' });
+				return;
+			}
+			res.json(restaurant);
+		} catch (err) {
+			console.log('api: ', err);
+			res.status(500).json({ error: err });
+		}
+	};
+
+	static async apiGetRestaurantCuisines(req, res) {
+		try {
+			let cuisines = await RestaurantsDAO.getCuisines();
+			res.json(cuisines);
+		} catch (err) {
+			console.log('api: ', err);
+			res.status(500).json({ error: err });
+		}
+	};
+};
